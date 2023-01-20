@@ -20,5 +20,5 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 const analytics = getAnalytics(app);
 // Create a root reference
-export const storage = getStorage();
+export const storage = getStorage(app);
 export const db = getFirestore();
