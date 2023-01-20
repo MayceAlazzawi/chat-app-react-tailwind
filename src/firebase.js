@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCMI4OLbe3AIIvDFQsyaEyl7yjdt69X0Pk",
@@ -12,7 +12,7 @@ const firebaseConfig = {
   storageBucket: "chat-80dd7.appspot.com",
   messagingSenderId: "413882561997",
   appId: "1:413882561997:web:366fe7b67b9610c8a14084",
-  measurementId: "G-EDLH682GE0"
+  measurementId: "G-EDLH682GE0",
 };
 
 // Initialize Firebase

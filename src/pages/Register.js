@@ -22,7 +22,6 @@ const Register = () => {
   const imageListRef = ref(storage, "images/");
 
   useEffect(() => {
-    console.log("useEffed");
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
@@ -34,7 +33,7 @@ const Register = () => {
     });
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const displayName = document.getElementById("name").value;
@@ -43,12 +42,12 @@ const Register = () => {
     const file = document.getElementById("file").value;
 
     try {
-      const res = createUserWithEmailAndPassword(auth, email, password); // Regestering
+      const res = await createUserWithEmailAndPassword(auth, email, password); // Regestering
 
       //Uploading image starts here
-      const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+      const imageRef = ref(storage, `images/${displayName + v4()}`);
       if (imageUpload == null) return;
-      uploadBytes(imageRef, imageUpload).then(() => {
+      await uploadBytes(imageRef, imageUpload).then(async () => {
         alert("image uploaded");
       });
     } catch {
