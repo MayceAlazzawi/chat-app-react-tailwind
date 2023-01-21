@@ -38,7 +38,7 @@ const Register = () => {
 
     const displayName = document.getElementById("name").value;
     const email = document.getElementById("email").value;
-    const password = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
     const file = document.getElementById("file").value;
 
     try {

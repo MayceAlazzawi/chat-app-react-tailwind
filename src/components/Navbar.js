@@ -7,6 +7,7 @@ const Navbar = () => {
   const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
+    console.log(currentUser);
     setUser(currentUser);
   });
   return (
@@ -19,8 +20,9 @@ const Navbar = () => {
           src={Add}
           alt="user"
           className="rounded-[50%] bg-white object-cover bg-lightPink w-[24px] h-[24px] "
+          // onClick={(e) => [console.log(auth.currentUser)]}
         />
-        <span className="text-xs hidden  md:block ">{user.email}</span>
+        <span className="text-xs hidden  md:block ">{user?.email}</span>
       </div>
     </div>
   );
