@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddAvatar from "../images/addAvatar.png";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -11,16 +12,14 @@ const Login = () => {
   // // const displayName = document.getElementById("name").value;
   const email = document.getElementById("email");
   const password = document.getElementById("password");
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
       console.log(document.getElementById("email").value);
-      const res = await signInWithEmailAndPassword(
-        auth,
-        email.value,
-        password.value
-      ); // sigin in
+      await signInWithEmailAndPassword(auth, email.value, password.value); // sigin in
+      navigate("/");
     } catch {
       setErr(true);
     }
@@ -66,19 +65,21 @@ const Login = () => {
               <button
                 className="Sign-in_btn bg-btn mb-3 ml-3 mr-3 p-2 font-bold text-xs text-white rounded"
                 type="submit"
-                // onClick={loginHandler}
+                onClick={loginHandler}
+                // to="/"
               >
                 Sign in
               </button>
             </form>
             <p className="text-xs text-gray">
               You don't have an account?{" "}
-              <a
+              <Link
                 href="#"
                 className="text-metal text-xs border-b hover:text-purple"
+                to="/Regester"
               >
                 Register
-              </a>
+              </Link>
             </p>
           </div>
           <div></div>

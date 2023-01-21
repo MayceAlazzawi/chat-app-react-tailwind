@@ -4,6 +4,8 @@ import { auth, storage, db } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { async } from "@firebase/util";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   ref,
   uploadBytes,
@@ -20,7 +22,7 @@ const Register = () => {
   const [imageList, setImageList] = useState([]);
 
   const imageListRef = ref(storage, "images/");
-
+  const navigate = useNavigate();
   useEffect(() => {
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
@@ -43,6 +45,7 @@ const Register = () => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password); // Regestering
+      navigate("/");
 
       //Uploading image starts here
       const imageRef = ref(storage, `images/${displayName + v4()}`);
@@ -64,7 +67,10 @@ const Register = () => {
             <p className="text-sm text-gray">Register</p>
           </div>
           <div className="form">
-            <form className="input-boxes_container flex flex-col">
+            <form
+              className="input-boxes_container flex flex-col"
+              onSubmit={handleSubmit}
+            >
               <input
                 className="name text-xs cursor-pointer bg-transparent w-[350px] p-4 border-silver border-b focus:outline-none"
                 type="text"
@@ -113,15 +119,23 @@ const Register = () => {
               >
                 Sign up
               </button>
+              <Link
+                className="Sign-in_btn bg-btn mb-3 ml-3 mr-3 p-2 font-bold text-xs text-white rounded"
+                type="submit"
+                to="/"
+              >
+                Sign in
+              </Link>
             </form>
             <p className="text-xs text-gray">
-              You do have an account?{" "}
-              <a
+              You do have an account?
+              <Link
                 href="#"
                 className="text-metal text-xs border-b hover:text-purple"
+                to="/login"
               >
                 Login
-              </a>
+              </Link>
             </p>
             {err ? (
               <span className="text-red text-m">Something went wrong!</span>

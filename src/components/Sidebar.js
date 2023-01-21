@@ -4,6 +4,7 @@ import Search from "./Search";
 import Chats from "./Chats";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const logout = async (e) => {
@@ -16,12 +17,13 @@ const Sidebar = () => {
       <Navbar />
       <Search />
       <Chats />
-      <button
-        className="bg-darkPurple absolute bottom-0  border-purple border-t  w-full text-lightPink text-xs cursor-pointer h-[35px] p-1"
+      <Link
+        className="bg-darkPurple absolute bottom-0 text-center border-purple border-t  w-full text-lightPink text-xs cursor-pointer h-[35px] p-1"
         onClick={logout}
+        to="/login"
       >
         Logout
-      </button>
+      </Link>
     </div>
   );
 };
