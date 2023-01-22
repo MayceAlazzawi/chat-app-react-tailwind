@@ -6,10 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [err, setErr] = useState(false);
-  // const [email, setEmail] = useState(" ");
-  // const [password, setPassword] = useState(" ");
 
-  // // const displayName = document.getElementById("name").value;
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const navigate = useNavigate();
@@ -17,7 +14,6 @@ const Login = () => {
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      console.log(document.getElementById("email").value);
       await signInWithEmailAndPassword(auth, email.value, password.value); // sigin in
       navigate("/");
     } catch {
@@ -40,20 +36,12 @@ const Login = () => {
                 type="email"
                 placeholder="email"
                 id="email"
-                // onChange={({ target }) => {
-                //   const { value } = target;
-                //   setEmail(target.value);
-                // }}
               />
               <input
                 className="password text-xs cursor-pointer bg-transparent w-[350px] p-4 border-silver border-b focus:outline-none"
                 type="password"
                 placeholder="password"
                 id="password"
-                // onChange={(e) => {
-                //   setPassword(e.target.value);
-                //   console.log(password);
-                // }}
               />
               <input
                 className="file text-xs cursor-pointer bg-transparent w-[350px] p-4 border-silver w-[250px] focus:outline-non"
@@ -66,7 +54,6 @@ const Login = () => {
                 className="Sign-in_btn bg-btn mb-3 ml-3 mr-3 p-2 font-bold text-xs text-white rounded"
                 type="submit"
                 onClick={loginHandler}
-                // to="/"
               >
                 Sign in
               </button>
@@ -81,6 +68,9 @@ const Login = () => {
                 Register
               </Link>
             </p>
+            {err ? (
+              <span className="text-red text-m">Something went wrong!</span>
+            ) : null}
           </div>
           <div></div>
         </div>

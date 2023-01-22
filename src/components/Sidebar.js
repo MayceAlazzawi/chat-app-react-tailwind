@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const logout = async (e) => {
-    console.log("working");
-    await signOut(auth);
+    await signOut(auth); //auth has info about the user?
   };
 
   return (

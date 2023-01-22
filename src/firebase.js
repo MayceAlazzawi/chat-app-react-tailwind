@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCMI4OLbe3AIIvDFQsyaEyl7yjdt69X0Pk",
@@ -21,4 +21,4 @@ export const auth = getAuth();
 const analytics = getAnalytics(app);
 // Create a root reference
 export const storage = getStorage(app);
-export const db = getFirestore();
+export const db = getFirestore(app);
