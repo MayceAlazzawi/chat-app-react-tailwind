@@ -104,13 +104,10 @@ const Register = () => {
                 id="password"
               />
               <input
-                className="file text-xs cursor-pointer bg-transparent w-[350px] p-4 border-silver w-[250px] focus:outline-non"
-                id="file"
-                type="file"
+                required
                 style={{ display: "none" }}
-                onChange={(e) => {
-                  setImageUpload(e.target.files[0]);
-                }}
+                type="file"
+                id="file"
               />
               <label
                 className="flex flex-row items-center m-2 gap-2 "

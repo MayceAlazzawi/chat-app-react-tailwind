@@ -3,7 +3,6 @@ import Add from "../images/add.png";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
-
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
@@ -15,7 +14,7 @@ const Navbar = () => {
       </span>
       <div className="user flex items-center gap-2">
         <img
-          src={currentUser.photoUrl}
+          src={currentUser.photoURL}
           alt="user"
           className="rounded-[50%] bg-white object-cover bg-lightPink w-[24px] h-[24px] "
           // onClick={(e) => [console.log(auth.currentUser)]}
