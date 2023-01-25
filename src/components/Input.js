@@ -19,7 +19,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 const Input = () => {
-  const [text, setText] = useState("k");
+  const [text, setText] = useState("");
   const [img, setImg] = useState(null);
   const [err, setErr] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -63,15 +63,23 @@ const Input = () => {
 
     // }
     //update last message in each chat
-    // await updateDoc(doc(db, "userchats", currentUser.uid), {
-    //   [data.chatId + ".lastMessage"]: { text },
-    //   [data.chatId + ".date"]: serverTimestamp(),
-    // });
-    // await updateDoc(doc(db, "userchats", data.chatId), {
-    //   [data.chatId + ".lastMessage"]: { text },
-    //   [data.chatId + ".date"]: serverTimestamp(),
-    // });
+    //check data in console
+    await updateDoc(doc(db, "userChats", currentUser.uid), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+    await updateDoc(doc(db, "userchats", data.user.Id), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+    setText(" ");
+    setImg(null);
   };
+
   return (
     <div className="h-[50px] p-[11px] bg-white bg-purple absolute bottom-0 border-t w-full border-lightPink  flex justify-between">
       <input
@@ -82,7 +90,7 @@ const Input = () => {
         onChange={(e) => {
           setText(e.target.value);
         }}
-        // value={text}
+        value={text}
       />
       <div className="send flex gap-2 ">
         <img
@@ -99,7 +107,7 @@ const Input = () => {
         />
         <label htmlFor="file">
           <img
-            src={Add}
+            src={img}
             alt=""
             className="bg-lightPink cursor-pointer rounded-full w-[24px] h-[24px] hidden lg:block"
           />

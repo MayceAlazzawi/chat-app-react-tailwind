@@ -30,27 +30,29 @@ const Chats = () => {
   };
   return (
     <div>
-      {Object.entries(chat)?.map((chat) => (
-        <div
-          key={chat[0]}
-          className="userChat p-2 cursor-pointer flex gap-2 items-center hover:bg-darkPurple rounded "
-          onClick={() => handleSelect(chat[1].userInfo)}
-        >
-          <img
-            src={chat[1].userInfo.photoURL}
-            alt=""
-            className="w-[35px] h-[35px] rounded-full  bg-lightPink object-cover"
-          />
-          <div className="userInfo text-white hidden  md:block">
-            <span className="font-medium text-[14px]">
-              {chat[1].userInfo.displayName}
-            </span>
-            <p className="text-[11px] text-lightPink">
-              {chat[1].lastMessage?.text}
-            </p>
+      {Object.entries(chat)
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => (
+          <div
+            key={chat[0]}
+            className="userChat p-2 cursor-pointer flex gap-2 items-center hover:bg-darkPurple rounded "
+            onClick={() => handleSelect(chat[1].userInfo)}
+          >
+            <img
+              src={chat[1].userInfo.photoURL}
+              alt=""
+              className="w-[35px] h-[35px] rounded-full  bg-lightPink object-cover"
+            />
+            <div className="userInfo text-white hidden  md:block">
+              <span className="font-medium text-[14px]">
+                {chat[1].userInfo.displayName}
+              </span>
+              <p className="text-[11px] text-lightPink">
+                {chat[1].lastMessage?.text}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
