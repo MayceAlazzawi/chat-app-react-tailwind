@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import Add from "../img/add.png";
+import AddAvatar from "../images/addAvatar.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -11,29 +11,18 @@ import { v4 } from "uuid";
 
 const Register = () => {
   const [err, setErr] = useState(false);
-  const [imageUpload, setImageUpload] = useState(null);
-  const [image, setImage] = useState("");
-
-  const imageListRef = ref(storage, "images/");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    listAll(imageListRef).then((res) => {
-      res.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImage(url);
-        });
-      });
-    });
-  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const displayName = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const file = document.getElementById("file");
-
+    const file = document.getElementById("file").files[0];
+    if (!file) console.log("error");
+    // const storageRef = ref(storage, `${displayName + v4()}`);
+    // await uploadBytesResumable(storageRef, file).then(() => console.log("u"));
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password); // Regestering for auth only
       //Uploading image starts here
@@ -43,8 +32,8 @@ const Register = () => {
       //   alert("image uploaded");
       // });
 
-      const storageRef = ref(storage, `${displayName + res.user.uid}`);
-      await uploadBytesResumable(storageRef, file.value).then(() => {
+      const storageRef = ref(storage, `${displayName + res.user.uid + ".png"}`);
+      uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             //Update profile
@@ -52,7 +41,6 @@ const Register = () => {
               displayName,
               photoURL: downloadURL,
             });
-
             //create user on firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
@@ -71,6 +59,10 @@ const Register = () => {
     } catch (err) {
       setErr(true);
     }
+  };
+
+  const uploadImage = (e) => {
+    console.log("dsa,");
   };
   return (
     <div className="bg-bg h-screen flex items-center justify-center">
@@ -114,11 +106,7 @@ const Register = () => {
                 htmlFor="file"
                 id="file"
               >
-                {image === "" || imageUpload === null ? (
-                  <img src="" alt="" style={{ width: "40px" }} />
-                ) : (
-                  <img src={image} alt="image" style={{ width: "40px" }} />
-                )}
+                <img src={AddAvatar} alt="" style={{ width: "40px" }} />
                 <span className="text-xs text-gray hover:text-purple hover:b-border cursor-pointer">
                   Add an avatar
                 </span>

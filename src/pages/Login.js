@@ -59,7 +59,7 @@ const Login = () => {
               </button>
             </form>
             <p className="text-xs text-gray">
-              You don't have an account?{" "}
+              You don't have an account?
               <Link
                 href="#"
                 className="text-metal text-xs border-b hover:text-purple"
