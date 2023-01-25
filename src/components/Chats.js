@@ -22,7 +22,7 @@ const Chats = () => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
-  console.log(Object.entries(chat)); // one
+  // console.log(Object.entries(chat)); // one
   //   console.log(Object.entries(chat)[0][0]);
 
   const handleSelect = (u) => {
@@ -46,7 +46,7 @@ const Chats = () => {
               {chat[1].userInfo.displayName}
             </span>
             <p className="text-[11px] text-lightPink">
-              {/* {chat[1].userInfo.lastMessage?.text} */}
+              {chat[1].lastMessage?.text}
             </p>
           </div>
         </div>
