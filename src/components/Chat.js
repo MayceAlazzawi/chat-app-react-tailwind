@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Add from "../images/add.png";
 import Messages from "./Messages";
 import Input from "./Input";
@@ -7,12 +7,16 @@ import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
-  console.log(data);
+  const [chatContent, setChatContent] = useState(true);
+
+  useEffect(() => {
+    data.user ? setChatContent(true) : setChatContent(false);
+  });
   return (
     <div className="chat relative flex h-full mb-auto flex-col">
       <div className="messages-and_chatInfo h-full">
         <div className="chatinfo text-sm font-normal  p-1 h-[50px] w-full flex justify-between items-center text-lightPink bg-purple ">
-          <span>{data.user?.displayName}</span>
+          <span>{chatContent && data.user.displayName}</span>
           <div className="chatIcons flex h-[24px] ">
             <img src={Add} alt="" />
             <img src={Add} alt="" />

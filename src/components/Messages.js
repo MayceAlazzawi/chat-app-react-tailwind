@@ -22,9 +22,9 @@ const Messages = () => {
 
   return (
     <div className="messages bg-lightPink h-full flex flex-col gap-[15px] overflow-scroll">
-      {messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
+      {messages
+        ? messages.map((m) => <Message message={m} key={m.id} />)
+        : console.log(" no messages")}
     </div>
   );
 };
