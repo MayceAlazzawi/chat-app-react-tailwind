@@ -5,7 +5,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
   return (
     <div className="navbar flex items-center justify-between bg-darkPurple h-[70px] p-[10px] center text-lightPink rounded text-center">
       <span className="logo font-bold text-sm hidden md:block ">

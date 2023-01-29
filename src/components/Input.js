@@ -1,9 +1,8 @@
 import React from "react";
-// import Img from "../images/Img.png"
-import Add from "../images/add.png";
-// import Atttach from "../images/Attach.png"
+import Img from "../images/img.png";
+// import Atttach from "../images/img.png"
 import { useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuid } from "uuid";
 import { ref } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -20,48 +19,48 @@ import {
 } from "firebase/firestore";
 const Input = () => {
   const [text, setText] = useState("");
-  const [img, setImg] = useState(null);
+  // const [img, setImg] = useState(null);
   const [err, setErr] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext); //data contains the other user
   // const text = document.getElementById("text").value;
+  // const file = document.getElementById("file").files[0];
+  // if (!img) console.log("error");
 
   const handleSubmit = async () => {
     // if (img) {
-    // console.log("w");
-    // const storageRef = ref(storage, uuidv4());
-
-    // const uploadTask = uploadBytesResumable(storageRef, img);
-
-    // uploadTask.on(
-    //   (error) => {
-    //     //TODO:Handle Error // and img
-    //   },
-    //   () => {
-    //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-    //       await updateDoc(doc(db, "chats", data.chatId), {
-    //         message: arrayUnion({
-    //           id: uuidv4(),
-    //           text,
-    //           senderId: currentUser.uid,
-    //           date: Timestamp.now(),
-    //           imgi: downloadURL,
-    //         }),
+    //   console.log("sad,");
+    //   const storageRef = ref(storage, `${currentUser.displayName + ".png"}`);
+    //   const uploadTask = uploadBytesResumable(storageRef, img);
+    //   uploadTask.on(
+    //     (error) => {
+    //       //TODO:Handle Error
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    //         await updateDoc(doc(db, "chats", data.chatId), {
+    //           messages: arrayUnion({
+    //             id: uuid(),
+    //             text,
+    //             senderId: currentUser.uid,
+    //             date: Timestamp.now(),
+    //             img: downloadURL,
+    //           }),
+    //         });
     //       });
-    //     });
-    //   }
-    // );
+    //     }
+    //   );
     // } else {
     await updateDoc(doc(db, "chats", data.chatId), {
       message: arrayUnion({
-        id: uuidv4(),
+        id: uuid(),
         text,
         senderId: currentUser.uid,
         date: Timestamp.now(),
       }),
     });
-
     // }
+
     //update last message in each chat
     //check data in console
     await updateDoc(doc(db, "userChats", currentUser.uid), {
@@ -77,7 +76,7 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
     setText(" ");
-    setImg(null);
+    // setImg(null);
   };
 
   return (
@@ -93,23 +92,25 @@ const Input = () => {
         value={text}
       />
       <div className="send flex gap-2 ">
-        <img
-          src={Add}
+        {/* <img
+          src={Img}
           alt=""
-          className="bg-lightPink w-[24px] h-[24px] rounded-full cursor-pointer hidden lg:block"
-        />
+          className=" w-[24px] h-[24px] rounded-full cursor-pointer hidden lg:block"
+        /> */}
         <input
           type="file"
           style={{ display: "none" }}
           id="file"
           className="focus:outline-none"
-          onChange={(e) => setImg(e.target.files[0])}
+          // onChange={(e) => {
+          //   setImg(e.target.files[0]);
+          // }}
         />
         <label htmlFor="file">
           <img
-            src={img}
+            src={Img}
             alt=""
-            className="bg-lightPink cursor-pointer rounded-full w-[24px] h-[24px] hidden lg:block"
+            className="cursor-pointer rounded-full w-[24px] h-[24px] hidden lg:block"
           />
         </label>
         <button
