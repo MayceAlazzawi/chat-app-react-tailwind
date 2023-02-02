@@ -36,7 +36,7 @@ const Chats = () => {
   };
   return (
     <div>
-      {Object.entries(chats)
+      {/* {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
           <div
@@ -58,7 +58,7 @@ const Chats = () => {
               </p>
             </div>
           </div>
-        ))}
+        ))} */}
     </div>
   );
 };
