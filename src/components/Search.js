@@ -71,7 +71,7 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-      console.log("selected");
+      // console.log("selected");
     } catch (err) {}
     //To close the search menu after pressing enter
     setUser(null);

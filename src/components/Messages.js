@@ -18,7 +18,7 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <div className="messages bg-lightPink h-full flex flex-col gap-[15px] overflow-scroll">
