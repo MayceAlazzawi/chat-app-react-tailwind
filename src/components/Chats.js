@@ -17,6 +17,8 @@ const Chats = () => {
         //   setChats([{}]);
         // } else {
         setChats(doc.data());
+        // console.log(chats);
+
         // }
       });
       return () => {
@@ -26,32 +28,47 @@ const Chats = () => {
 
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-  // console.log(chats); //undefind
-
+  // console.log(
+  //   Object.entries(chats) === "undefined"
+  //     ? console.log("yes undifined up")
+  //     : console.log("hi up")
+  // );
+  // console.log(
+  //   Object.entries(chats)[0][1]["userInfo"]["displayName"] === "undefined"
+  //     ? console.log("yes undifined up")
+  //     : console.log("hi up")
+  // );
+  // console.log(Object.entries(chats)[0][1]["userInfo"]["displayName"]);
+  //
   // console.log(Object.entries(chat)); // one
   //   console.log(Object.entries(chat)[0][0]);
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
+
   return (
     <div>
       {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
           <div
-            key={chat[0]}
+            key={chat[0] === "null" ? "null" : chat[0]}
             className="userChat p-2 cursor-pointer flex gap-2 items-center hover:bg-darkPurple rounded "
             onClick={() => handleSelect(chat[1].userInfo)}
           >
             <img
-              src={chat[1].userInfo.photoURL}
+              src={chat[1].userInfo?.photoURL}
               alt=""
               className="w-[35px] h-[35px] rounded-full  bg-lightPink object-cover"
             />
             <div className="userInfo text-white hidden  md:block">
               <span className="font-medium text-[14px]">
-                {chat[1].userInfo.displayName}
+                {/* {chat[1].userInfo.displayName} */}
+                {/* {chat[1]["userInfo"]["displayName"] === "undefined"
+                  ? console.log("yes undifined")
+                  : console.log("hi")} */}
+                {chat[1].userInfo?.displayName}
               </span>
               <p className="text-[11px] text-lightPink">
                 {chat[1].lastMessage?.text}
