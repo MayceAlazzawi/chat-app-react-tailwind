@@ -12,14 +12,13 @@ const Chats = () => {
   useEffect(() => {
     const getChats = async () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-        // if (!doc.data()) {
-        //   console.log("no data 1");
-        //   setChats([{}]);
-        // } else {
-        setChats(doc.data());
-        // console.log(chats);
-
-        // }
+        if (!doc.data()) {
+          console.log("no data 1");
+          setChats([{}]);
+        } else {
+          // console.log(doc.data());
+          setChats(doc.data());
+        }
       });
       return () => {
         unsub();
@@ -42,15 +41,18 @@ const Chats = () => {
   //
   // console.log(Object.entries(chat)); // one
   //   console.log(Object.entries(chat)[0][0]);
-
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
-
   return (
     <div>
       {Object.entries(chats)
-        ?.sort((a, b) => b[1].date - a[1].date)
+        ?.filter(
+          (item) =>
+            Object.entries(item[0]).length > 0 &&
+            Object.entries(item[1]).length > 0
+        )
+        .sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
           <div
             key={chat[0] === "null" ? "null" : chat[0]}
@@ -68,7 +70,9 @@ const Chats = () => {
                 {/* {chat[1]["userInfo"]["displayName"] === "undefined"
                   ? console.log("yes undifined")
                   : console.log("hi")} */}
-                {chat[1].userInfo?.displayName}
+                {chat[1].userInfo
+                  ? chat[1].userInfo.displayName
+                  : "No user name found"}
               </span>
               <p className="text-[11px] text-lightPink">
                 {chat[1].lastMessage?.text}
