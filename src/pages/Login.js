@@ -23,22 +23,22 @@ const Login = () => {
 
   return (
     <div className="bg-bg h-screen flex items-center justify-center">
-      <div className="bg-white grid h-1/2 flex align-center w-1/2 justify-center content-center rounded p-6">
-        <div className="grid gap-8 text-center">
-          <div className="title pt-4">
+      <div className="bg-white grid text-center h-1/2 flex align-center w-4/5 md:w-[50%] lg:w-[30%] justify-center content-center rounded p-3 ">
+        <div className="grid gap-8">
+          <div className="title pt-4 w-full md:w-[300px]">
             <h1>Kiki's Chat</h1>
             <p className="text-sm text-gray">Login</p>
           </div>
           <div className="form">
-            <form className="input-boxes_container flex flex-col">
+            <form className="input-boxes_container w-full flex flex-col">
               <input
-                className="email text-xs bg-transparent w-[350px] cursor-pointer p-4 border-silver border-b focus:outline-none"
+                className="email text-xs bg-transparent cursor-pointer w-full p-4 border-silver border-b focus:outline-none"
                 type="email"
                 placeholder="email"
                 id="email"
               />
               <input
-                className="password text-xs cursor-pointer bg-transparent w-[350px] p-4 border-silver border-b focus:outline-none"
+                className="password text-xs cursor-pointer bg-transparent  w-full p-4 border-silver border-b focus:outline-none"
                 type="password"
                 placeholder="password"
                 id="password"
@@ -51,7 +51,7 @@ const Login = () => {
               />
 
               <button
-                className="Sign-in_btn bg-btn mb-3 ml-3 mr-3 p-2 font-bold text-xs text-white rounded"
+                className="Sign-in_btn bg-btn mb-3 ml-3 mr-3 mt-3 p-2 font-bold text-xs text-white rounded"
                 type="submit"
                 onClick={loginHandler}
               >

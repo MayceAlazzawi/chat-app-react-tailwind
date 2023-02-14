@@ -7,9 +7,7 @@ const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div className="navbar flex items-center justify-between bg-darkPurple h-[70px] p-[10px] center text-lightPink rounded text-center">
-      <span className="logo font-bold text-sm hidden md:block ">
-        Kiki's chat
-      </span>
+      <span className="logo font-bold text-sm hidden md:block ">Mys.chat</span>
       <div className="user flex items-center gap-2">
         <img
           src={currentUser.photoURL}
